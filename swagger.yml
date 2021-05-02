@@ -1,0 +1,93 @@
+consumes:
+  - application/todo-list.v1+json
+info:
+  description: API Specification
+  title: Todo API
+  version: 1.0.0
+produces:
+  - application/todo-list.v1+json
+schemes:
+  - http
+swagger: "2.0"
+definitions:
+  apiResponse:
+    type: object
+    required:
+      - Status
+    properties:
+      Status:
+        type: integer
+        format: int64
+        readOnly: true
+      Payload:
+        type: object
+      Message:
+        type: string
+paths:
+  /api/v1/todos/:id:
+    get:
+      tags:
+        - todos
+      parameters:
+        - name: id
+          required: false
+          type: integer
+          in: query
+          description: return all if it's not set
+      responses:
+        200:
+          description: list the todo operations
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/apiResponse"
+    put:
+      tags:
+        - todos
+      parameters:
+        - name: id
+          required: false
+          type: integer
+          in: query
+          description: return all if it's not set
+      responses:
+        200:
+          description: list the todo operations
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/apiResponse"
+    delete:
+      tags:
+        - todos
+      parameters:
+        - name: id
+          required: false
+          type: integer
+          in: query
+          description: return all if it's not set
+      responses:
+        200:
+          description: list the todo operations
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/apiResponse"
+
+/api/v1/todos:
+  post:
+    tags:
+      - todos
+    parameters:
+      - name: id
+        required: false
+        type: integer
+        in: query
+        description: return all if it's not set
+    responses:
+      200:
+        description: list the todo operations
+        schema:
+          type: array
+          items:
+            $ref: "#/definitions/apiResponse"

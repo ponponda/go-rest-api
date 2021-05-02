@@ -23,9 +23,22 @@ pipeline {
                 sh 'go test ./...'
             }
         }
-        stage('Release') {
+        // stage('Build Image') {
+        //     agent {
+        //         dockerfile {
+        //             filename 'Dockerfile'
+        //             dir '.'
+        //         }
+        //     }
+        //     steps {
+        //         sh 'done'
+        //     }
+        // }
+        stage('Deploy') {
             steps {
-                sh 'done'
+                sh 'heroku container:login'
+                sh 'heroku container:push api -a todo-api'
+                sh 'heroku container:release api -a todo-api'
             }
         }
     }
